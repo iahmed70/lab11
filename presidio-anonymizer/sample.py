@@ -25,10 +25,10 @@ def main():
     # Change the following line to test any operator:
 
     # output = run_anonymizer("replace", {"new_value": "BIP"})
-    output = run_anonymizer("redact")
+        output = run_anonymizer("redact")
     # output = run_anonymizer("initial") # this operator is to be done in the lab
     
-    print(output)
+        print(output)
 
 
 if __name__ == "__main__":

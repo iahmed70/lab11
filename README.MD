@@ -9,20 +9,24 @@
 
 * A written description of the call stack leading to line 133 in operators_factory.py
 ```
-From the <module> sample.py (line 35), 
-to the main method in sample.py (line 29), 
-to the run_anonymizer method in the sample.py (line 13)
-to the anonymize method in AnonymizerEngine Class (line 104)
-[complete the call stack here]
+From the <module> sample.py (line 35),
+to the main method in sample.py (line 29),
+to the run_anonymizer method in sample.py (line 13),
+to the anonymize method in AnonymizerEngine class (line 104),
+to the create_operator_class method in OperatorsFactory class (line 133),
+to the operator = operators_by_type.get(operator_name) line in OperatorsFactory class (line 133)
+
 ```
 
 * How many if/elif branches are used in selecting the operator?
-*Put your answer here*
+*There is no if/elif cascade that maps each operator name to code.
+The factory does not use a long if/elif chain to pick redact, initals tc etc. rather it uses Conditional checks total 3, like ternary if not operators_by_type, if not operator*
 
 * What data structure (a Python data type) exactly is used to select the operator?
-*Put your answer here*
+*Dictionary*
 
 * Explain how "Strategy" design pattern is reflected here.
+* The factory demonstrates the Strategy design pattern because it selects and returns different operator objects that all implement the same Operator interface. Each concrete operator, like Redact, Mask, or Initial, encapsulates a specific anonymization or deanonymization algorithm. The OperatorsFactory allows the engine to choose which operator to use at runtime based on configuration (OperatorType and operator_name) without modifying the engine itself. This separation of algorithm selection from usage, along with the ability to add new operators without changing existing code, exemplifies the Strategy pattern.*
 
 
 ---
