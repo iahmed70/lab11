@@ -11,8 +11,10 @@ def test_correct_name():
     "input_text, initials",
     [
         ("John Smith", "J. S."),
-        # whitespace-trimming case required by Tasks 5 & 6:
         ("     Eastern    Michigan   University ", "E. M. U."),
+        ("@abc", "@A."),
+        ("@843A", "@8."),
+        ("--**abc", "--**A."),
     ],
 )
 def test_given_value_for_initial(input_text, initials):

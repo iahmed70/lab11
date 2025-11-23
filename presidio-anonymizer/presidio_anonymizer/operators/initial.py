@@ -7,26 +7,32 @@ class Initial(Operator):
     """Minimal 'initial' anonymizer for tests."""
 
     def operate(self, text: str, params: Dict = None) -> str:
-
         if not isinstance(text, str):
             return text
 
-        # strip leading/trailing whitespace and split on any whitespace (collapses multiples)
         parts = [p for p in text.strip().split() if p]
-
         initials_list = []
+
         for part in parts:
-            # Find first alphabetical character in the part (handles punctuation/hyphens)
-            initial_char = None
-            for ch in part:
-                if ch.isalpha():
-                    initial_char = ch
+            # find index of first alphanumeric character
+            idx = None
+            for i, ch in enumerate(part):
+                if ch.isalnum():
+                    idx = i
                     break
-            if initial_char:
-                initials_list.append(f"{initial_char.upper()}.")
+
+            if idx is None:
+                # no alphanumeric char in this part -> skip it
+                continue
+
+            prefix = part[:idx]  # everything before the alphanumeric char
+            alnum_char = part[idx]
+            # uppercase if it's a letter; digits unchanged
+            initial_char = alnum_char.upper() if alnum_char.isalpha() else alnum_char
+            initials_list.append(f"{prefix}{initial_char}.")
 
         if not initials_list:
-            # No alphabetic characters found — return original text unchanged
+            # If we didn't find any alphanumeric characters at all, return original text
             return text
 
         return " ".join(initials_list)
