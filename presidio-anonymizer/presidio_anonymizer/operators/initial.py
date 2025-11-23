@@ -7,28 +7,16 @@ class Initial(Operator):
     """Minimal 'initial' anonymizer for tests."""
 
     def operate(self, text: str, params: Dict = None) -> str:
-        """
-        Convert a full name into initials.
-        Examples:
-            "John Smith" -> "J. S."
-            "john   doe"  -> "J. D."
-            "Mary-Jane O'Neil" -> "M. O."
-            "Single" -> "S."
-        Rules:
-        - Split on whitespace, ignore empty parts.
-        - For each name part, pick the first alphabetical character.
-        - Uppercase the initial, append a period.
-        - Join initials with a single space.
-        """
+
         if not isinstance(text, str):
             return text
 
-        # Split by whitespace and filter out empties
+        # strip leading/trailing whitespace and split on any whitespace (collapses multiples)
         parts = [p for p in text.strip().split() if p]
 
         initials_list = []
         for part in parts:
-            # Find first alphabetical character in the part
+            # Find first alphabetical character in the part (handles punctuation/hyphens)
             initial_char = None
             for ch in part:
                 if ch.isalpha():
