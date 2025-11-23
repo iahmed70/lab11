@@ -1,4 +1,0 @@
-1. There is no if/elif cascade that maps each operator name to code.
-The factory does not use a long if/elif chain to pick redact, initals tc etc. rather it uses Conditional checks total 3, like ternary if not operators_by_type, if not operator	
-2. Dictionary
-3. The factory demonstrates the Strategy design pattern because it selects and returns different operator objects that all implement the same Operator interface. Each concrete operator, like Redact, Mask, or Initial, encapsulates a specific anonymization or deanonymization algorithm. The OperatorsFactory allows the engine to choose which operator to use at runtime based on configuration (OperatorType and operator_name) without modifying the engine itself. This separation of algorithm selection from usage, along with the ability to add new operators without changing existing code, exemplifies the Strategy pattern.
